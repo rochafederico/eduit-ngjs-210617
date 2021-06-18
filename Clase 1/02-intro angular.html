@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS</title>
+</head>
+<body>
+<header>
+    Educacion IT
+</header>
+<main>
+    <section ng-app=""  ng-cloak>
+        <div ng-init="algo = 'algo'">
+            <span ng-bind="algo"></span>
+            {{ algo }}
+        </div>
+        {{ algo.split(' ')[0]}}
+        <!-- <div ng-init="algo = 'algo nuevo'"></div> -->
+
+        <button ng-click="algo = 'Hicieron click'"> Hace click</button>
+        <div>
+            {{ algo + ": otra cosa" }}
+        </div>
+        {{ 1 + 2 }}
+
+        <button ng-init="mostrarAlgo = false" ng-click="mostrarAlgo = !mostrarAlgo">Palanca</button>
+        {{mostrarAlgo}}
+        <div ng-show="mostrarAlgo">
+            ng-show: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit, dolorem rerum veniam ea perspiciatis ullam nesciunt aliquam minima hic molestias cum autem ut qui quo ab optio animi eveniet? Debitis?
+        </div>
+        <div ng-hide="mostrarAlgo">
+            ng-hide: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit, dolorem rerum veniam ea perspiciatis ullam nesciunt aliquam minima hic molestias cum autem ut qui quo ab optio animi eveniet? Debitis?
+        </div>
+
+        <div ng-if="mostrarAlgo">
+            ng-if:Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit, dolorem rerum veniam ea perspiciatis ullam nesciunt aliquam minima hic molestias cum autem ut qui quo ab optio animi eveniet? Debitis?
+        </div>
+    </section>
+</main>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</body>
+</html>

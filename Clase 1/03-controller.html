@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="miApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS</title>
+</head>
+<body>
+    <header>
+        Educacion IT
+    </header>
+    <main ng-controller="miController">
+        {{ 5 + 5 }}
+        {{ algo }}
+        {{ objecto.propieda }}
+        <button ng-click="miFuncion('parametro')"></button>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        angular.module('miApp', []).controller('miController', function($scope){
+            $scope.algo = 'algo';
+            $scope.lista = ["uno","dos"];
+            $scope.objecto = { propieda: 12312 };
+            $scope.miFuncion = function(param){
+                debugger
+                $scope.algo = 'nuevo algo';
+            }
+            debugger
+        });
+    </script>
+</body>
+</html>
