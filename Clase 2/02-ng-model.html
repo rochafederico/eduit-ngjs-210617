@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="miApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NgModel</title>
+</head>
+<body>
+    <header>
+        Educacion IT
+    </header>
+    <main ng-controller="ngModelController">
+        <label>
+            Titulo:
+            <input
+                type="text"
+                minlength="20"
+                ng-model="nuevaNoticia.titulo"
+                ng-model-options="{ updateOn: 'mouseup blur', debounce: {mouseup: 0, blue: 1000}, allowInvalid: false }">
+                <!-- ng-model-options="{ updateOn: 'mouseup', debounce: 1000, allowInvalid: false }"> -->
+        </label><br>
+        <label>
+            Descripcion:
+            <textarea ng-model="nuevaNoticia.descripcion"></textarea>
+        </label><br>
+        
+        {{nuevaNoticia | json}}
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        angular.module('miApp', [])
+    </script>
+    <script src="02-ng-model-controller.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="miApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS</title>
+</head>
+
+<body>
+    <header>
+        Educacion IT
+    </header>
+    <main ng-controller="ngRepeatController">
+        <section ng-repeat="noticia in noticias">
+            <h1>{{noticia.titulo}}</h1>
+            <p>{{noticia.descripcion}}</p>
+            <table>
+                <tr>
+                    <td>$index</td>
+                    <td>{{ $index }}</td>
+                </tr>
+                <tr>
+                    <td>$first</td>
+                    <td>{{ $first }}</td>
+                </tr>
+                <tr>
+                    <td>$middle</td>
+                    <td>{{ $middle }}</td>
+                </tr>
+                <tr>
+                    <td>$last</td>
+                    <td>{{ $last }}</td>
+                </tr>
+                <tr>
+                    <td>$even</td>
+                    <td>{{ $even }}</td>
+                </tr>
+                <tr>
+                    <td>$odd</td>
+                    <td>{{ $odd }}</td>
+                </tr>
+            </table>
+            <button type="button" ng-click="borrarNoticia($index)">Borrar</button>
+        </section>
+        <h1 ng-repeat-start="(key, noticia) in noticias">{{noticia.titulo}}</h1>
+        {{key}}
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolorem distinctio rerum illo accusantium fuga
+            a dignissimos placeat aut praesentium quibusdam voluptatibus quae inventore, saepe repellendus facere,
+            impedit, ut labore?</p>
+        <p ng-repeat-end>{{noticia.descripcion}}</p>
+
+        <h1 ng-repeat-start="(key, value) in noticias[0]">{{key}}</h1>
+        {{value}}
+        <p ng-repeat-end>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolorem distinctio rerum illo accusantium fuga
+            a dignissimos placeat aut praesentium quibusdam voluptatibus quae inventore, saepe repellendus facere,
+            impedit, ut labore?
+            {{noticia.descripcion}}</p>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+
+        // var variableUno = {
+        //     algo: 123123,
+        //     otracos: "asfasas"
+        // }
+        // var variableUno = angular.copy(varibelUno);
+
+        // creando un modulo
+        angular.module('miApp', [])
+    </script>
+    <script src="01-ng-repeat-controller.js"></script>
+</body>
+
+</html>
