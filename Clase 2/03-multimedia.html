@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="miApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archivos multimedia</title>
+</head>
+<body>
+    <header>
+        Educacion IT
+    </header>
+    <main ng-controller="multimediController">
+        <a target="_blank" ng-href="{{urlBaseImagenes }}{{imagen}}">Enlace imagen</a>
+        <a ng-init="urlFinalImagen = urlBaseImagenes +imagen" target="_blank" ng-href="{{urlFinalImagen}}">
+            <img ng-src="{{urlFinalImagen}}">
+        </a>
+        <br>
+        <video ng-src="{{urlBaseVideoAudio + video}}" controls></video>
+        <video controls>
+            <source ng-src="{{urlBaseVideoAudio + video}}"  type="video/mp4">
+        </video>
+        <audio ng-src="{{urlBaseVideoAudio + audio}}" controls></audio>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        angular.module('miApp', [])
+            .constant('urlBaseMultimedia', "https://www.w3schools.com/")
+            // .constant('urlBaseMultimedia', "https://www.w3schools.com/tags/img_girl.jpg")
+            // .constant('urlBaseMultimedia', "https://www.w3schools.com/html/mov_bbb.mp4")
+            .run(function($rootScope, urlBaseMultimedia){
+                $rootScope.urlBaseImagenes = urlBaseMultimedia + "tags/";
+                $rootScope.urlBaseVideoAudio = urlBaseMultimedia + "html/";
+            })
+            .controller('multimediController', function($scope){
+                $scope.imagen = "img_girl.jpg";
+                $scope.video = "mov_bbb.mp4";
+                $scope.audio = "horse.ogg";
+            })
+    </script>
+</body>
+
+</html>
