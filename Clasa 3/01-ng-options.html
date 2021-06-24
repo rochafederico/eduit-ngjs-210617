@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="miApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ng-options</title>
+</head>
+<body>
+    <header>
+        Educacion IT
+    </header>
+    <main ng-controller="opyionsController">
+        <select ng-model="opcionSeleccionada">
+            <option ng-repeat="noticia in noticias" value="{{noticia.id}}">{{noticia.titulo}}</option>
+        </select><br>
+        valor: {{opcionSeleccionada}}<br>
+        <select ng-model="opcionSeleccionada" ng-options="cualquiercosa for cualquiercosa in otraLita"></select><br>
+        <select ng-model="opcionSeleccionada" ng-options="noticia.id for noticia in noticias"></select><br>
+        <select ng-model="opcionSeleccionada" ng-options="noticia.id as noticia.titulo for noticia in noticias"></select><br>
+        valor: {{opcionSeleccionada}}<br>
+        <button ng-click="opcionSeleccionada = 8">Seleccionar noticia 8</button><br>
+
+
+        <select
+            ng-model="ciudadSeleccionada"
+            ng-options="ciudad.cod as ciudad.cod_descripcion group by ciudad.pcia_descripcion for ciudad in ciudades"></select><br>
+        {{ciudadSeleccionada}}
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        angular.module('miApp', [])
+    </script>
+    <script src="01-ciudades.js"></script>
+    <script>
+        angular.module('miApp')
+            .controller('opyionsController', function($scope, ciudades){
+                $scope.noticias = [
+                    { id:1, titulo: "Titulo 1", descripcion: "Kjahskfjahsd kjshd ughsi dfug isdfg siufdgh isudfgh isudfhg isudfhg sdfg sd"},
+                    { id:2, titulo: "Titulo 2", descripcion: "Kjahskfjahsd kjshd ughsi dfug isdfg siufdgh isudfgh isudfhg isudfhg sdfg sd"},
+                    { id:3, titulo: "Titulo", descripcion: "Kjahskfjahsd kjshd ughsi dfug isdfg siufdgh isudfgh isudfhg isudfhg sdfg sd"},
+                    { id:4, titulo: "Titulo", descripcion: "Kjahskfjahsd kjshd ughsi dfug isdfg siufdgh isudfgh isudfhg isudfhg sdfg sd"},
+                    { id:5, titulo: "Titulo", descripcion: "Kjahskfjahsd kjshd ughsi dfug isdfg siufdgh isudfgh isudfhg isudfhg sdfg sd"},
+                    { id:6, titulo: "Titulo", descripcion: "Kjahskfjahsd kjshd ughsi dfug isdfg siufdgh isudfgh isudfhg isudfhg sdfg sd"},
+                    { id:7, titulo: "Titulo", descripcion: "Kjahskfjahsd kjshd ughsi dfug isdfg siufdgh isudfgh isudfhg isudfhg sdfg sd"},
+                    { id:8, titulo: "Titulo", descripcion: "Kjahskfjahsd kjshd ughsi dfug isdfg siufdgh isudfgh isudfhg isudfhg sdfg sd"},
+                    { id:9, titulo: "Titulo", descripcion: "Kjahskfjahsd kjshd ughsi dfug isdfg siufdgh isudfgh isudfhg isudfhg sdfg sd"}
+                ];
+
+                $scope.otraLita = ["sdasd","asdasd","asdas"]
+                $scope.ciudades = ciudades;
+
+                $scope.opcionSeleccionada = 2
+            })
+    </script>
+</body>
+
+</html>
