@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="estilosApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ng-class ng-style</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <main ng-controller="empleadosController">
+        <label>
+            <input type="checkbox" ng-model="error"> Error
+        </label>
+        <table class="table" ng-class="{ 'table-danger': error }">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                </tr>
+            </thead>
+            <!-- <tbody ng-init="estiloFila = 'algo-clase algo-nuevo'">
+                <tr ng-repeat-start="empleado in empleados" ng-class="estiloFila">
+                    <td>{{empleado.nombre}}</td>
+                    <td>{{empleado.apellido}}</td>
+                </tr>
+                <tr ng-repeat-end>
+                    <td colspan="2" ng-show="empleado.estaCoucheado">Esta coucheado</td>
+                    <td colspan="2" ng-hide="empleado.estaCoucheado">No esta coucheado</td>
+                </tr>
+            </tbody> -->
+            <tbody>
+                <tr ng-repeat-start="empleado in empleados" ng-class="comoEsta(empleado)">
+                    <td>{{empleado.nombre}}</td>
+                    <td>{{empleado.apellido}}</td>
+                </tr>
+                <tr ng-repeat-end ng-class="comoEsta(empleado)">
+                    <td colspan="2" ng-show="empleado.estaCoucheado">Esta coucheado</td>
+                    <td colspan="2" ng-hide="empleado.estaCoucheado">No esta coucheado</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        {{ cantidades() }}
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <section>
+            <input type="color" ng-model="colorSeleccionado"> {{colorSeleccionado}}
+            <button ng-click="estiloDeParrafo = { 'background-color': colorSeleccionado}">Cambiar color</button>
+            <p ng-style="estiloDeParrafo">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum, ipsa voluptates, reiciendis saepe quos quam fugiat officiis quisquam quod incidunt numquam asperiores quae atque eius dolorum doloribus nisi delectus hic.
+            </p>
+        </section>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        angular.module('estilosApp', [])
+            .controller('empleadosController', function($scope){
+                $scope.empleados = [
+                    { nombre: 'Eze', apellido: "López", estaCoucheado: false},
+                    { nombre: 'Gonza', apellido: "Garcia", estaCoucheado: true},
+                    { nombre: 'Kevin', apellido: "Rios", estaCoucheado: false},
+                    { nombre: 'Lau', apellido: "Navoni", estaCoucheado: true}
+                ]
+
+                $scope.cantidades = function() {
+                    var resultado = "Hay {0} coucheados de {1} empleados";
+
+                    var cantidadCoucheados = 0;
+                    angular.forEach($scope.empleados,function(empleado) {
+                        if(empleado.estaCoucheado) {
+                            cantidadCoucheados++;
+                        }
+                    });
+                    resultado = resultado.replace('{0}', cantidadCoucheados);
+                    resultado = resultado.replace('{1}',$scope.empleados.length);
+                    return resultado;
+                }
+
+                $scope.comoEsta =function(empleado){
+                    return {
+                        'table-success': empleado.estaCoucheado,
+                        'table-warning': !empleado.estaCoucheado
+                    }
+                }
+            })
+    </script>
+</body>
+</html>
