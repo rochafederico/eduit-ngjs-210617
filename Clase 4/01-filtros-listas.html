@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="filtrosListaApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtros listas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body class="container">
+    <header>
+        Educacion IT
+    </header>
+    <main ng-controller="empleadosController">
+
+        <table class="table" ng-init="propOrden= 'nombre';reverseOrden= false">
+            <thead>
+                <tr>
+                    <th>
+                        <button type="button" ng-click="cambiarProp('nombre')">
+                            Nombre:
+                        </button>
+                        <br>
+                        <input type="text" ng-model="buscarNombre">
+                    </th>
+                    <th>
+                        <button type="button" ng-click="propOrden='apellido'">
+                            Apellido:
+                        </button>
+                        <input type="text" ng-model="buscarApellido">
+                    </th>
+                    <th>
+                        ¿Esta coucheado?<br>
+                        <select type="text" ng-model="buscarCouch"
+                            ng-options="opcion.valor as opcion.label for opcion in opcionsCouch">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    ng-repeat="empleado in empleados | filter : { nombre: buscarNombre, apellido: buscarApellido, estaCoucheado: buscarCouch } | orderBy: propOrden: reverseOrden | limitTo: cantidad: ((pagina * cantidad) - cantidad)">
+                    <td>{{empleado.nombre}}</td>
+                    <td>{{empleado.apellido}}</td>
+                    <td ng-show="empleado.estaCoucheado">Si</td>
+                    <td ng-hide="empleado.estaCoucheado">No</td>
+                </tr>
+            </tbody>
+            <tfoot ng-init="cantidad = 5; pagina = 1">
+                <tr>
+                    <td colspan="4">
+                        <button type="button" ng-click="pagina=1">1</button>
+                        <button type="button" ng-click="pagina=2">2</button>
+                        <button type="button" ng-click="pagina=3">3</button>
+                        <select ng-model="cantidad" ng-options="item for item in [5,10,15,20]"></select>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        angular.module('filtrosListaApp', [])
+            .controller('empleadosController', function ($scope) {
+                $scope.empleados = [
+                    { nombre: 'Eze', apellido: "López", estaCoucheado: false },
+                    { nombre: 'Gonza', apellido: "Garcia", estaCoucheado: true },
+                    { nombre: 'Kevin', apellido: "Rios", estaCoucheado: false },
+                    { nombre: 'Lau', apellido: "Navoni", estaCoucheado: true },
+                    { nombre: 'Gonza2', apellido: "Garcia", estaCoucheado: true },
+                    { nombre: 'Kevin2', apellido: "Rios", estaCoucheado: false },
+                    { nombre: 'Lau2', apellido: "Navoni", estaCoucheado: true },
+                    { nombre: 'Gonza3', apellido: "Garcia", estaCoucheado: true },
+                    { nombre: 'Kevin3', apellido: "Rios", estaCoucheado: false },
+                    { nombre: 'Lau3', apellido: "Navoni", estaCoucheado: true }
+                ]
+                $scope.opcionsCouch = [
+                    { label: 'Todos', valor: '' },
+                    { label: 'Si', valor: true },
+                    { label: 'No', valor: false }
+                ];
+                $scope.cambiarProp = function(prop) {
+                    if($scope.propOrden != prop){
+                        $scope.propOrden = prop;
+                        $scope.reverseOrden = false;
+                    } else {
+                        $scope.reverseOrden = !$scope.reverseOrden;
+                    }
+                }
+            })
+    </script>
+</body>
+
+</html>
