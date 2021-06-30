@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="formApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularios: submited y name</title>
+</head>
+<body ng-controller="formController">
+    <form name="nuevoEmpleado" ng-submit="enviarFormulario()" novalidate>
+        <input type="text" name="nombre" ng-model="nombre" required> <span ng-if="nuevoEmpleado.$submitted && nuevoEmpleado.nombre.$error.required">Ingrese un nombre</span>
+        <br>
+        
+        <input type="text" name="apellido" ng-model="apellido" required> <span ng-if="nuevoEmpleado.$submitted && nuevoEmpleado.apellido.$error.required">Ingrese un apellido</span>
+        <br>
+        <!-- <button type="submit" ng-disabled="nuevoEmpleado.$invalid">
+            ENVIAR
+        </button> -->
+        <button type="submit">
+            ENVIAR
+        </button>
+    </form>
+    <table>
+        <tr>
+            <td>$valid</td>
+            <td>{{nuevoEmpleado.$valid}}</td>
+        </tr>
+        <tr>
+            <td>$invalid</td>
+            <td>{{nuevoEmpleado.$invalid}}</td>
+        </tr>
+        <tr>
+            <td>$submitted</td>
+            <td>{{nuevoEmpleado.$submitted}}</td>
+        </tr>
+        <tr>
+            <td>$error</td>
+            <td>{{nuevoEmpleado.$error}}</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td></td>
+            <td>
+                nombre
+            </td>
+            <td>
+                apellido
+            </td>
+        </tr>
+        <tr>
+            <td>$valid</td>
+            <td>{{nuevoEmpleado.nombre.$valid}}</td>
+            <td>{{nuevoEmpleado.apellido.$valid}}</td>
+        </tr>
+        <tr>
+            <td>$invalid</td>
+            <td>{{nuevoEmpleado.nombre.$invalid}}</td>
+            <td>{{nuevoEmpleado.apellido.$invalid}}</td>
+        </tr>
+        <tr>
+            <td>$touched</td>
+            <td>{{nuevoEmpleado.nombre.$touched}}</td>
+            <td>{{nuevoEmpleado.apellido.$touched}}</td>
+        </tr>
+        <tr>
+            <td>$error</td>
+            <td>{{nuevoEmpleado.nombre.$error}}</td>
+            <td>{{nuevoEmpleado.apellido.$error}}</td>
+        </tr>
+    </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        angular.module('formApp', [])
+        .controller('formController', function($scope){
+            $scope.enviarFormulario = function() {
+                if($scope.nuevoEmpleado.$valid) {
+                    $scope.nombre = '';
+                    $scope.apellido = '';
+                    debugger
+                    $scope.nuevoEmpleado.$setSubmitted(false);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
