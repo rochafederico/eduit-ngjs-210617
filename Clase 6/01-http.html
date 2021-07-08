@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="llamadasHttp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicioes nativos AngularJS ($q,$http, $window, $timeuot)</title>
+</head>
+
+<body ng-controller="httpController">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        angular.module('llamadasHttp', [])
+            .constant('urlBase', 'https://jsonplaceholder.typicode.com')
+            .controller('httpController', function ($http, urlBase) {
+                $http({
+                    method: 'GET',
+                    url: '01-http.html',
+                    Headers: {
+                        responseType: 'document'
+                    }
+                }).then(function (data) {
+                    debugger
+                })
+                $http.get(urlBase + '/todos', {
+                    Headers: {
+                        responseType: 'document'
+                    }
+                }).then(function (data) {
+                    console.log('respuesta', data)
+                })
+                const body = { title: 'Algo' }
+                $http.post(urlBase + '/todos', body).then(function (data) {
+                    console.log('respuesta', data)
+                })
+            })
+
+    </script>
+
+</body>
+
+</html>
