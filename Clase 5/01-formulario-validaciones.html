@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="formularioValidaciones">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+</head>
+
+<body class="container" ng-controller="empleadosController" ng-init="minimoNombre=3">
+    <form name="nuevoEmpleado" ng-submit="agregarEmpleado()" novalidate>
+        <div class="form-group" ng-class="{'has-success': nuevoEmpleado.nombre.$valid}">
+            <label for="nombre">Nombre</label>
+            <input ng-model="empelado.nombre" type="text" class="form-control" name="nombre" placeholder="Nombre"
+                required ng-minlength="minimoNombre">
+            <label for="nombre" class="help-block" ng-messages="nuevoEmpleado.nombre.$error"
+                ng-if="nuevoEmpleado.$submitted">
+                <span ng-message="required">Ingrese un nombre</span>
+                <span ng-message="minlength">Ingrese almenos {{minimoNombre}} caracteres</span>
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input ng-model="empelado.apellido" type="text" class="form-control" name="apellido" placeholder="Apellido"
+                required>
+        </div>
+        <div class="form-group">
+            <label for="apellido">Correo electronico</label>
+            <input ng-model="empelado.email" type="email" class="form-control" name="email" ng-pattern="patronMail">
+        </div>
+        <div class="checkbox">
+            <label>
+                <input ng-model="empelado.tenesHijos" type="checkbox" name="tenesHijos"> ¿Tenes
+                hijos?
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="apellido">Cantidad</label>
+            <input ng-model="empelado.cantidadHijos" type="text" class="form-control" name="cantidadHijos"
+                ng-required="empelado.tenesHijos">
+        </div>
+        <div class="checkbox">
+            <label>
+                <input ng-model="empelado.estaCoucheado" type="checkbox" name="estaCoucheado"> Esta
+                coucheado
+            </label>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-control">
+                    <input type="date" ng-model="desde" name="desde" ng-max="hasta">
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+            <div class="col-lg-6">
+                <div class="form-control">
+                    <input type="date" ng-model="hasta" name="hasta" ng-min="desde">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-default">Enviar</button>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="/modules/empleados.module.js"></script>
+    <script src="/modules/filters/ya-existe-empleado.filter.js"></script>
+    <script src="angular-messages.min.js"></script>
+    <script>
+        angular.module('formularioValidaciones', ['empleados', 'ngMessages']);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="formularioValidaciones">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+</head>
+
+<body class="container" ng-controller="empleadosController" ng-init="minimoNombre=3">
+    <form name="nuevoEmpleado" ng-submit="agregarEmpleado()" novalidate>
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input ng-model="empelado.nombre" type="text" class="form-control" name="nombre" placeholder="Nombre"
+                required ng-minlength="minimoNombre">
+        </div>
+        <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input ng-model="empelado.apellido" type="text" class="form-control" name="apellido" placeholder="Apellido"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="apellido">Pais</label>
+            <select ng-model="empelado.pais" class="form-control" name="pais" required
+                ng-options="item for item in ['Argentina', 'Colombia', 'Venezuela']" ng-change="cambioPais()">
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="apellido">Provincia</label>
+            <select ng-model="empelado.provincia" class="form-control" name="provincia" required
+                ng-options="item for item in provincias" ng-disabled="!empelado.pais">
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="apellido">Ciudad</label>
+            <select ng-model="empelado.ciudad" class="form-control" name="ciudad" required
+                ng-options="item for item in ciudades" ng-disabled="!empelado.provincia">
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-default">Enviar</button>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="angular-messages.min.js"></script>
+    <script>
+        angular.module('formularioValidaciones', ['ngMessages'])
+            .controller("empleadosController", function ($scope, $filter) {
+                $scope.empleados = [
+                    { nombre: "Eze", apellido: "López", estaCoucheado: false },
+                    { nombre: "Gonza", apellido: "Garcia", estaCoucheado: true },
+                    { nombre: "Kevin", apellido: "Rios", estaCoucheado: false },
+                    { nombre: "Lau", apellido: "Navoni", estaCoucheado: true },
+                    { nombre: "Gonza2", apellido: "Garcia", estaCoucheado: true },
+                    { nombre: "Kevin2", apellido: "Rios", estaCoucheado: false },
+                    { nombre: "Lau2", apellido: "Navoni", estaCoucheado: true },
+                    { nombre: "Gonza3", apellido: "Garcia", estaCoucheado: true },
+                    { nombre: "Kevin3", apellido: "Rios", estaCoucheado: false },
+                    { nombre: "Lau3", apellido: "Navoni", estaCoucheado: true },
+                ];
+                $scope.opcionsCouch = [
+                    { label: "Todos", valor: "" },
+                    { label: "Si", valor: true },
+                    { label: "No", valor: false },
+                ];
+                $scope.cambiarProp = function (prop) {
+                    if ($scope.propOrden != prop) {
+                        $scope.propOrden = prop;
+                        $scope.reverseOrden = false;
+                    } else {
+                        $scope.reverseOrden = !$scope.reverseOrden;
+                    }
+                };
+                $scope.agregarEmpleado = function () {
+                    var yaExisteEmpleado = $filter("yaExisteEmpleado");
+                    if ($scope.nuevoEmpleado.$valid && !yaExisteEmpleado($scope.empelado, $scope.empleados)) {
+                        $scope.empleados.push(angular.copy($scope.empelado));
+                        $scope.empelado = {
+                            nombre: "",
+                            apellido: "",
+                            estaCoucheado: false,
+                        };
+                    }
+                };
+                $scope.patronMail = "[a-z]{1,}[@][a-z]{1,}[.]{1,1}[a-z]{2,}";
+                $scope.cambioPais = function () {
+                    if ($scope.empelado.pais) {
+                        $scope.provincias = ["Chubut", "Buenos Aires", "Cordoba", "Misiones"];
+                    } else {
+                        $scope.provincias = [];
+                    }
+                    $scope.empelado.provincia = '';
+                    $scope.empelado.ciudad = '';
+                }
+
+                $scope.$watch('empelado.provincia', function (newValue, current) {
+                    if (newValue) {
+                        $scope.ciudades = ["Bagota", "Buenos Aires", "Caracas", "Puerto Madryn"];
+                    }
+                    $scope.empelado.ciudad = '';
+                })
+                $scope.$watchGroup(['empelado.provincia', 'empelado.ciudad'], function (newValue, current) {
+                    console.log(newValue, current);
+                })
+                $scope.$watchCollection($scope.empleados, function (newValue, current) {
+                    console.log(newValue, current);
+                })
+            }).filter("yaExisteEmpleado", function () {
+                return function (empleadoActual, lista) {
+                    var resultado = false;
+                    for (let i = 0; i < lista.length; i++) {
+                        const empleado = lista[i];
+                        if (
+                            empleado.nombre == empleadoActual.nombre &&
+                            empleado.apellido == empleadoActual.apellido
+                        ) {
+                            resultado = true;
+                            break;
+                        }
+                    }
+                    return resultado;
+                };
+            });
+    </script>
+</body>
+
+</html>

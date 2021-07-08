@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="serviciosNgJs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicioes nativos AngularJS ($q,$http, $window, $timeuot)</title>
+</head>
+
+<body ng-controller="controllerInjeccion">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="/modules/empleados.module.js"></script>
+    <script src="/modules/filters/ya-existe-empleado.filter.js"></script>
+    <script>
+        var controllerInyeccion = function (asasas) {
+            debugger
+        };
+        controllerInyeccion.$injector = ['$scoope'];
+        angular.module('serviciosNgJs', ['empleados'])
+            // .controller('controllerInjeccion', ['$scope', controllerInyeccion]);
+            // .controller('controllerInjeccion', controllerInyeccion);
+            .controller('controllerInjeccion', ['$scope', '$q', '$timeout', function ($scope, $q, $timeout) {
+                $scope.cargando = true;
+
+                var mipromesa = $q(function (resolve, reject) {
+                    $timeout(function () {
+                        reject('Termino');
+                    }, 1000)
+                })
+
+                mipromesa.then(function (data) {
+                    debugger
+                }).catch(function (error) {
+                    debugger
+                }).finally(function () {
+                    $scope.cargando = false;
+                })
+            }]);
+    </script>
+
+</body>
+
+</html>
