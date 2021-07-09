@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="templatesApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios propios</title>
+</head>
+
+<body ng-init="idTemplate = '/item.html'">
+    {{idTemplate}}
+    <script type="text/ng-template" id="/item.html">
+        <h1>Hola como va?</h1>
+    </script>
+
+    <main ng-repeat="item in [0,1,2]" ng-include="idTemplate"></main>
+
+    <button ng-click="mostarHtml = true">Mostrar HTML</button>
+    <ng-include ng-if="mostarHtml" src="'03-templates-ejemplo.html'"></ng-include>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        angular.module('templatesApp', [])
+    </script>
+
+</body>
+
+</html>
