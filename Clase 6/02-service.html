@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="serviciosPropios">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios propios</title>
+</head>
+
+<body ng-controller="serviciosPropiosContoller">
+    <form ng-submit="traerInfo()">
+        <input ng-model="id">
+        <button ng-if="!editando" type="submit">Traer datos</button>
+        <code>
+            {{todoObtenido|json}}
+        </code>
+        <button ng-click="editar(todoObtenido)">Palanca editar</button>
+        <fieldset>
+            <input type="text" ng-model="todoAEditar.title">
+        </fieldset>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        angular.module('serviciosPropios', [])
+            .constant('urlBase', 'https://jsonplaceholder.typicode.com')
+            .service('todosService', ['$http', 'urlBase', function ($http, urlBase) {
+                var urlBaseTodos = urlBase + '/todos';
+                return {
+                    algo: 22,
+                    obtenerTodos: function () {
+                        return $http.get(urlBaseTodos).then(function (response) {
+                            return response.data
+                        })
+                    },
+                    getById: function (id) {
+                        return $http.get(urlBaseTodos + '/' + id).then(function (response) {
+                            return response.data
+                        })
+                    }
+                }
+            }])
+            .factory('copiarTodo',[function() {
+                return function(todo) {
+                    return {
+                        title: todo.title
+                    }
+                }
+            }])
+            .controller('serviciosPropiosContoller', function ($scope, todosService, copiarTodo) {
+                todosService.obtenerTodos().then(function (data) {
+                    $scope.todos = data;
+                })
+                $scope.traerInfo = function(){
+                    todosService.getById($scope.id).then(function(data){
+                        $scope.todoObtenido = data;
+                    })
+                }
+                $scope.editar = function (todo) {
+                    $scope.editando=!$scope.editando
+                    // $scope.todoAEditar = todo;
+                    $scope.todoAEditar = copiarTodo(todo);
+                }
+            })
+
+    </script>
+
+</body>
+
+</html>
