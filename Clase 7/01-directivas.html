@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="directivasApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directivas</title>
+</head>
+
+<body ng-init="algo='dasdasd'">
+    <mi-directiva otra-forma="dsafsdt·&356345afgafwer13" ng-model="algo">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam est assumenda recusandae modi expedita
+        molestiae reprehenderit eligendi ipsam, delectus earum placeat commodi. Asperiores laborum illum unde, nobis
+        perferendis iure enim.
+    </mi-directiva>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        // miDirectiva = mi-directiva
+        angular.module('directivasApp', []).directive('miDirectiva', [function () {
+            return {
+                // template: '<h1>Mi directiva</h1>'
+                templateUrl: 'mi-directiva.html',
+                restrict: 'EA', // C = clase de css, M = comentario
+                require: 'ngModel',
+                scope: { // true
+                    // ngModel
+                    miAtributo: '@otraForma',
+                    ngModel: '='
+                },
+                // controller: 'elController'
+                // controllerAs: function($scope){
+                // }
+                transclude: true,
+                link: function (scope, element, attrs, ctrl, transclude) {
+                    ctrl.$parsers.push(function (valor) {
+
+                        ctrl.$setValidity('esFede', valor == "Fede")
+                        console.dir(ctrl);
+                        return valor;
+                    })
+                }
+            }
+        }])
+    </script>
+</body>
+
+</html>
