@@ -16,44 +16,20 @@
     </header>
     <main >
         <div class="row">
-            <!-- <div class="col-sm-6">
+            <div class="col-sm-6">
                 <label>
                     <input type="checkbox" ng-model="mostrarEmpleados">
                 </label>
                 <div class="panel panel-default" ng-if="mostrarEmpleados">
                     <div class="panel-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Apellido</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat-start="empleado in empleados">
-                                    <td>{{empleado.nombre}}</td>
-                                    <td>{{empleado.apellido}}</td>
-                                </tr>
-                                <tr ng-repeat-end>
-                                    <td colspan="2" ng-show="empleado.estaCoucheado">Esta coucheado</td>
-                                    <td colspan="2" ng-hide="empleado.estaCoucheado">No esta coucheado</td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="2">
-                                        {{ cantidades() }}
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                        <ng-include src="'templates/empleado/empleado-lista.html'"/>
                     </div>
                 </div>
-            </div> -->
+            </div>
             <div class="col-sm-6">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <ng-include src="'templates/empleado/formulario-empleado.html'"/>
+                        <ng-include src="'templates/empleado/empleado-formulario.html'"/>
                     </div>
                 </div>
             </div>
@@ -62,7 +38,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="modules/laboratorio.module.js"></script>
     <script src="controllers/empleados.controller.js"></script>
+    <script src="controllers/empleados.form.controller.js"></script>
+    <script src="data/ciudades.js"></script>
+    <script src="filters/ya-existe-empleado.filter.js"></script>
     <script src="service/empleados.service.js"></script>
+    <script src="service/territorios.service.js"></script>
 </body>
 
 </html>

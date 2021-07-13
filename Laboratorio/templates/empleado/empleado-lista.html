@@ -1,0 +1,25 @@
+<table class="table" ng-controller="empleadosController">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat-start="empleado in empleados">
+            <td>{{empleado.nombre}}</td>
+            <td>{{empleado.apellido}}</td>
+        </tr>
+        <tr ng-repeat-end>
+            <td colspan="2" ng-show="empleado.estaCoucheado">Esta coucheado</td>
+            <td colspan="2" ng-hide="empleado.estaCoucheado">No esta coucheado</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2">
+                {{ cantidades() }}
+            </td>
+        </tr>
+    </tfoot>
+</table>

@@ -1,0 +1,39 @@
+<div ng-controller="empleadosFormController">
+    <form name="nuevoEmpleado" ng-submit="agregarEmpleado()" novalidate>
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input ng-model="empleado.nombre" type="text" class="form-control" id="nombre" placeholder="Nombre">
+        </div>
+        <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input ng-model="empleado.apellido" type="text" class="form-control" id="apellido" placeholder="Apellido">
+        </div>
+        <div class="checkbox">
+            <label>
+                <input ng-model="empleado.estaCoucheado" type="checkbox" name="estaCoucheado"> Esta
+                coucheado
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="apellido">Pais</label>
+            <select ng-model="empleado.pais" class="form-control" name="pais" required
+                ng-options="pais for pais in paises" ng-change="cambioPais()">
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="apellido">Provincia</label>
+            <select ng-model="empleado.provincia" class="form-control" name="provincia" required
+                ng-options="item for item in provincias" ng-disabled="!empleado.pais">
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="apellido">Ciudad</label>
+            <select ng-model="empleado.ciudad" class="form-control" name="ciudad" required
+                ng-options="item as item.cod_descripcion for item in ciudades track by item.cod"
+                ng-disabled="!empleado.provincia">
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-default">Enviar</button>
+    </form>
+</div>
