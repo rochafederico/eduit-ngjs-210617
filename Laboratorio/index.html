@@ -14,24 +14,16 @@
     <header>
         Educacion IT
     </header>
-    <main >
-        <div class="row">
-            <div class="col-sm-6">
-                <label>
-                    <input type="checkbox" ng-model="mostrarEmpleados">
-                </label>
-                <div class="panel panel-default" ng-if="mostrarEmpleados">
-                    <div class="panel-body">
-                        <ng-include src="'templates/empleado/empleado-lista.html'"/>
-                    </div>
-                </div>
+    <main>
+        <label>
+            <input type="checkbox" ng-model="mostrarEmpleados">
+        </label>
+        <div class="panel panel-default">
+            <div class="panel-body" ng-show="mostrarEmpleados">
+                <ng-include src="'templates/empleado/empleado-lista.html'" />
             </div>
-            <div class="col-sm-6">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <ng-include src="'templates/empleado/empleado-formulario.html'"/>
-                    </div>
-                </div>
+            <div class="panel-body" ng-hide="mostrarEmpleados">
+                <ng-include  src="'templates/empleado/empleado-formulario.html'" />
             </div>
         </div>
     </main>
@@ -41,8 +33,11 @@
     <script src="controllers/empleados.form.controller.js"></script>
     <script src="data/ciudades.js"></script>
     <script src="filters/ya-existe-empleado.filter.js"></script>
+    <script src="directives/eduit.encabezado.directive.js"></script>
+    <script src="directives/eduit.input.directive.js"></script>
     <script src="service/empleados.service.js"></script>
     <script src="service/territorios.service.js"></script>
+    <script src="validators/fede.validator.js"></script>
 </body>
 
 </html>

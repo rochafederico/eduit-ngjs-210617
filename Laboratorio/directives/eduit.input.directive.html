@@ -1,0 +1,9 @@
+<div class="form-group">
+    <label for="{{id}}">{{label}}:</label>
+    <ng-container ng-switch="type">
+        <select ng-switch-when="select" ng-model="ngModel" class="form-control" required
+            ng-options="item for item in items" ng-change="ngChange()" ng-disabled="disabled"></select>
+        <input ng-switch-default ng-model="ngModel" type="{{type}}" class="form-control" id="{{id}}"
+            placeholder="{{label}}" ng-disabled="disabled">
+    </ng-container>
+</div>
