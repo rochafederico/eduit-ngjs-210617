@@ -1,5 +1,5 @@
 angular
-  .module("laboratorio")
+  .module("empleadosApp")
   .controller("empleadosFormController", function(
     $scope,
     empleadosService,

@@ -1,4 +1,4 @@
-angular.module("laboratorio").constant("ciudades", [
+angular.module("eduitServices").constant("ciudades", [
   {
     pais_descripcion: "Argentina",
     cod: "1000",

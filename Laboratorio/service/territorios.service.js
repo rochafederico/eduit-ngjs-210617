@@ -1,4 +1,4 @@
-angular.module("laboratorio").service("territoriosService", [
+angular.module("eduitServices").service("territoriosService", [
   "ciudades",
   function(ciudades) {
     var paises = [];

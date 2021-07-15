@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="laboratorio">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+
+<body class="container">
+    <header>
+        Educacion IT
+    </header>
+    <main>
+        <label>
+            <input type="checkbox" ng-model="mostrarEmpleados">
+        </label>
+        <div class="panel panel-default">
+            <div class="panel-body" ng-show="mostrarEmpleados">
+                <ng-include src="'templates/empleado/empleado-lista.html'" />
+            </div>
+            <div class="panel-body" ng-hide="mostrarEmpleados">
+                <ng-include  src="'templates/empleado/empleado-formulario.html'" />
+            </div>
+        </div>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="../modules/eduit.ui.module.js"></script>
+    <script src="../directives/eduit.encabezado.directive.js"></script>
+    <script src="../directives/eduit.input.directive.js"></script>
+    
+    <script src="../modules/eduit.service.module.js"></script>
+    <script src="../data/ciudades.js"></script>
+    <script src="../service/territorios.service.js"></script>
+
+    <script src="../modules/empleados.module.js"></script>
+    <script src="../controllers/empleados.controller.js"></script>
+    <script src="../controllers/empleados.form.controller.js"></script>
+    <script src="../service/empleados.service.js"></script>
+</body>
+
+</html>

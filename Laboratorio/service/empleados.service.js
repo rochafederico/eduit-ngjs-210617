@@ -1,5 +1,5 @@
 angular
-  .module("laboratorio")
+  .module("empleadosApp")
   .constant("urlApiEmpleado", "http://edu-it-empleado.glitch.me")
   .service("empleadosService", [
     "$http",

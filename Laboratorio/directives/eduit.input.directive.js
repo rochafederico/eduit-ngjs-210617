@@ -1,4 +1,5 @@
-angular.module("laboratorio").directive("eduitInput", [
+angular
+  .module("eduitUi").directive("eduitInput", [
   function() {
     return {
       templateUrl: "/Laboratorio/directives/eduit.input.directive.html",

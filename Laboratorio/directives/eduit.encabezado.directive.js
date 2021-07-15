@@ -1,4 +1,6 @@
-angular.module("laboratorio").directive("eduitEncabezado", [
+angular
+  .module("eduitUi")
+  .directive("eduitEncabezado", [
     function() {
       return {
         templateUrl: "/Laboratorio/directives/eduit.encabezado.directive.html",
