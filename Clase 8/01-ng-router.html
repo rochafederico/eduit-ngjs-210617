@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="rutasAngular">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NgRouter</title>
+    <!-- <base href="/Clase%208/"> -->
+</head>
+<body>
+    <header>
+        Logo
+    </header>
+    <a href="#!/usuarios">Usuarios</a>
+    <ng-view></ng-view>
+    <!-- <div ng-view>    </div> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="../lib/angular-route.min.js"></script>
+    <script>
+        angular
+            .module('rutasAngular', ['ngRoute'])
+            .config(["$routeProvider",function($routeProvider, $locationProvider){
+                // $locationProvider.html5Mode(true);
+                $routeProvider.when('/:entidad', {
+                    // controller: 'miController'
+                    // controllerAs: 'miController'
+                    controller: function($route, $routeParams){
+                        debugger
+                    },
+                    // template: '<h1>hola!</h1>'
+                    templateUrl: 'template.html',
+                    resolveAs: {
+                        algo: 'algo'
+                    },
+                    // resolve: {
+                    //     empleados: function(empleadosService){
+                    //         return empleadosService.getAll();
+                    //     },
+                    //     otraCosa: function($q){
+                    //         return $q(function(resolve, reject){
+                    //             resolve("");
+                    //         });
+                    //     }
+                    // },
+                    // // redirectTo: '/login',
+                    // redirectTo: function(userService){
+                    //     if(userService.estaLogeado()){
+                    //         return '/home';
+                    //     }
+                    //     return '/login';
+                    // }
+                }).when('/:entidad/crear', {
+                    controller: function($route, $routeParams){
+                        debugger
+                    },
+                    templateUrl: 'template.html'
+                }).when('/:entidad/editar/:id', {
+                    controller: function($route, $routeParams){
+                        debugger
+                    },
+                    templateUrl: 'template.html'
+                });
+                $routeProvider.otherwise('/')
+            }])
+    </script>
+</body>
+</html>
