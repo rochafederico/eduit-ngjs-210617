@@ -10,34 +10,11 @@
         integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 </head>
 
-<body class="container">
-    <header>
-        Educacion IT
-    </header>
-    <main>
-        <label>
-            <input type="checkbox" ng-model="mostrarEmpleados">
-        </label>
-        <div class="panel panel-default">
-            <div class="panel-body" ng-show="mostrarEmpleados">
-                <ng-include src="'templates/empleado/empleado-lista.html'" />
-            </div>
-            <div class="panel-body" ng-hide="mostrarEmpleados">
-                <ng-include  src="'templates/empleado/empleado-formulario.html'" />
-            </div>
-        </div>
-    </main>
+<body class="container text-center">
+    Cargando
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="modules/user.module.js"></script>
     <script src="modules/laboratorio.module.js"></script>
-    <script src="controllers/empleados.controller.js"></script>
-    <script src="controllers/empleados.form.controller.js"></script>
-    <script src="data/ciudades.js"></script>
-    <script src="filters/ya-existe-empleado.filter.js"></script>
-    <script src="directives/eduit.encabezado.directive.js"></script>
-    <script src="directives/eduit.input.directive.js"></script>
-    <script src="service/empleados.service.js"></script>
-    <script src="service/territorios.service.js"></script>
-    <script src="validators/fede.validator.js"></script>
 </body>
 
 </html>

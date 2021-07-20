@@ -4,7 +4,7 @@ angular
     return {
       templateUrl: "/Laboratorio/directives/eduit.input.directive.html",
       restrict: "E",
-      require: "ngModel,type",
+      require: "ngModel",
       scope: {
         ngModel: "=",
         type: "@",
